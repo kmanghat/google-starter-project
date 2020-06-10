@@ -1,0 +1,4 @@
+vendorA ; flour ; butter ; chocolate ; vanilla ; sugar .
+vendorB ; cinnamon .
+vendorC ; flour ; sugar .
+vendorD ; vanilla ; cinnamon .

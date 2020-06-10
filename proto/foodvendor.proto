@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.helloworld";
+option java_outer_classname = "FoodvendorProto";
+option objc_class_prefix = "HLW";
+
+package foodvendor;
+
+// Foodvendor service gets the information of a particular ingredient sold by a vendor.
+service FoodvendorService {
+    rpc GetIngredientInfo (VendorRequest) returns (Ingredient) {}
+}
+
+// Foodsupplier service gets the list of vendors selling a particular ingredient
+service FoodsupplierService {
+    rpc FindVendors(IngredientRequest) returns (VendorList) {}
+}
+
+// Foodfinder service gets the information of all availble ingredients in the market
+service FoodfinderService {
+    rpc FindIngredient(IngredientRequest) returns (IngredientAvailability) {}
+}
+
+message VendorRequest {
+    string name = 1;
+    string ingredientName = 2;
+}
+
+message Ingredient{
+    string name = 1;
+    double price = 2;
+    int32 quantity = 3;
+}
+
+//List of venodors where a ingredient is available along with its price and quantity
+message IngredientAvailability{
+    repeated VendorIngredientInfo vendorIngredientInfo = 1;
+}
+
+message VendorIngredientInfo {
+    string name = 1;
+    Ingredient ingredient = 2;
+}
+
+message IngredientRequest{
+    string name = 1;
+}
+
+message VendorList {
+    repeated Vendor vendors = 1;
+}
+
+message Vendor{
+    string name = 1;
+}
+
+
