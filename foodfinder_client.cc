@@ -118,7 +118,6 @@ int main(int argc, char** argv) {
     std::cout << "Enter ingredient or ctrl+c to quit: ";
     while(std::cin >> ingredient){
         IngredientAvailability vendorList = finderClient.GetAvailableIngredients(ingredient);
-        std::cout<<"foof finder\n";
         if(vendorList.vendoringredientinfo_size() == 0) std::cout << "No vendors found :(\n";
         for(int i = 0; i < vendorList.vendoringredientinfo_size(); i++)
         {
