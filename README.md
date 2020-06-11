@@ -11,4 +11,6 @@ How to use:
 
 bazel run :foodfinder_client
 
+At the prompt type a single ingredient you want to find
+
 Query for ingredients {flour,chocolate etc} (Vendors and ingredients can be seen in database/data.txt and vendor files)
