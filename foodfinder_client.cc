@@ -91,7 +91,6 @@ int main(int argc, char** argv) {
     // the argument "--target=" which is the only expected argument.
     // We indicate that the channel isn't authenticated (use of
     // InsecureChannelCredentials()).
-    const absl::string_view endpoint = "http://localhost:9411/api/v2/spans";
       
       
     std::string target_str;
