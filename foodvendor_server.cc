@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <fstream>
 #include <grpcpp/grpcpp.h>
-
+#include "opencensus/exporters/trace/zipkin/zipkin_exporter.h"
 #ifdef BAZEL_BUILD
 #include "proto/foodvendor.grpc.pb.h"
 #else

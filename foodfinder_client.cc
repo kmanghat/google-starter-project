@@ -20,8 +20,10 @@
 #include <memory>
 #include <string>
 #include <vector>
-
+#include "opencensus/trace/sampler.h"
+#include "opencensus/trace/span.h"
 #include <grpcpp/grpcpp.h>
+#include "opencensus/exporters/trace/zipkin/zipkin_exporter.h"
 
 #ifdef BAZEL_BUILD
 #include "proto/foodvendor.grpc.pb.h"
@@ -89,6 +91,9 @@ int main(int argc, char** argv) {
     // the argument "--target=" which is the only expected argument.
     // We indicate that the channel isn't authenticated (use of
     // InsecureChannelCredentials()).
+    const absl::string_view endpoint = "http://localhost:9411/api/v2/spans";
+      
+      
     std::string target_str;
     std::string arg_str("--target");
     if (argc > 1) {
@@ -118,6 +123,7 @@ int main(int argc, char** argv) {
     std::cout << "Enter ingredient or ctrl+c to quit: ";
     while(std::cin >> ingredient){
         IngredientAvailability vendorList = finderClient.GetAvailableIngredients(ingredient);
+        
         if(vendorList.vendoringredientinfo_size() == 0) std::cout << "No vendors found :(\n";
         for(int i = 0; i < vendorList.vendoringredientinfo_size(); i++)
         {

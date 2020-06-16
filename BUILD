@@ -45,10 +45,16 @@ cc_binary(
     srcs = ["foodsupplier_server.cc"],
     defines = ["BAZEL_BUILD"],
     data = ["database/data.txt"],
+    linkopts = ["-pthread"],
     deps = [
         ":foodvendor_cc_grpc",
         # http_archive made this label available for binding
         "@com_github_grpc_grpc//:grpc++",
+        "@io_opencensus_cpp//opencensus/trace",
+        "@io_opencensus_cpp//opencensus/exporters/trace/zipkin:zipkin_exporter",
+        "@com_google_absl//absl/base:core_headers",
+        "@com_google_absl//absl/memory",
+        "@com_google_absl//absl/strings",
     ],
 )
 
@@ -58,10 +64,16 @@ cc_binary(
     srcs = ["foodvendor_server.cc"],
     defines = ["BAZEL_BUILD"],
     data = ["database/data.txt","database/vendorA.txt","database/vendorB.txt","database/vendorC.txt","database/vendorD.txt",],
+    linkopts = ["-pthread"],
     deps = [
         ":foodvendor_cc_grpc",
         # http_archive made this label available for binding
         "@com_github_grpc_grpc//:grpc++",
+        "@io_opencensus_cpp//opencensus/trace",
+        "@io_opencensus_cpp//opencensus/exporters/trace/zipkin:zipkin_exporter",
+        "@com_google_absl//absl/base:core_headers",
+        "@com_google_absl//absl/memory",
+        "@com_google_absl//absl/strings",
     ],
 )
 
@@ -69,10 +81,16 @@ cc_binary(
     name = "foodfinder_client",
     srcs = ["foodfinder_client.cc"],
     defines = ["BAZEL_BUILD"],
+    linkopts = ["-pthread"],
     deps = [
         ":foodvendor_cc_grpc",
         # http_archive made this label available for binding
         "@com_github_grpc_grpc//:grpc++",
+        "@io_opencensus_cpp//opencensus/trace",
+        "@io_opencensus_cpp//opencensus/exporters/trace/zipkin:zipkin_exporter",
+        "@com_google_absl//absl/base:core_headers",
+        "@com_google_absl//absl/memory",
+        "@com_google_absl//absl/strings",
     ],
 )
 
@@ -80,9 +98,18 @@ cc_binary(
     name = "foodfinder_server",
     srcs = ["foodfinder_server.cc"],
     defines = ["BAZEL_BUILD"],
+    linkopts = ["-pthread"],
     deps = [
         ":foodvendor_cc_grpc",
         # http_archive made this label available for binding
         "@com_github_grpc_grpc//:grpc++",
+        "@io_opencensus_cpp//opencensus/trace",
+        "@io_opencensus_cpp//opencensus/exporters/trace/zipkin:zipkin_exporter",
+        "@com_google_absl//absl/base:core_headers",
+        "@com_google_absl//absl/memory",
+        "@com_google_absl//absl/strings",
+        # For metrics
+        "@com_github_grpc_grpc//:grpc_opencensus_plugin",
+        "@io_opencensus_cpp//opencensus/exporters/stats/stackdriver:stackdriver_exporter",
     ],
 )
